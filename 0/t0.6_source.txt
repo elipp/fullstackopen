@@ -1,0 +1,18 @@
+title t0.6
+
+note over Client
+spa.js on sivua ladattaessa määritellyt Save-nappulalle 
+event handlerin (form.onsubmit), jota nappulaa painettaessa
+kutsutaan. Funktio lukee kentän sisällön, serialisoi sen ja
+päivämäärän json-objektiksi, joka pushataan notes-
+taulukon jatkeeksi (tämän jälkeen redrawNotes uudelleenrenderöi
+notet), jonka jälkeen json lähetetään palvelimelle (funktiossa 
+sendToServer) -> POST /exampleapp/new_note_spa
+end note
+Client->Server: POST /exampleapp/new_note_spa ( {"content":"jotain", "date":"<DATE>"} )
+Server->Client: response: JSON ( {"message":"note created"} )
+note over Client
+sendToServer()-funktiossa määritelty event handler printtaa konsoliin
+spa.js:37 {"message":"note created"}. Jos toinen käyttäjä lisäisi samaan
+aikaan uuden noten, ei se siis päivittyisi selaimen näkymään.
+end note
