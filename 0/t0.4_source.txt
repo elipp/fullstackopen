@@ -1,0 +1,27 @@
+title t0.4
+
+
+
+Client->Server: POST /exampleapp/new_note
+Server->Client: response: 302 Found
+note over Client
+uudelleenohjaus 302 headerin location-kentän osoittamaan /notes -tiedostoon, josta seuraa GET
+end note
+Client->Server: GET /exampleapp/notes
+Server->Client: response: /exampleapp/notes (HTML)
+Client->Server: GET /exampleapp/main.css
+Server->Client: response: main.css
+Client->Server: GET /exampleapp/main.js
+Server->Client: response: main.js
+note over Client
+selain alkaa suorittaa JavaScript-tiedostoa main.js
+end note
+Client->Server: GET /exampleapp/data.json (JavaScriptistä käsin)
+Server->Client: response: data.json [{content: "Jotain kamaa", date: "2020-jotain"}, ...]
+note over Client
+selain suorittaa event handlerin ja renderöi data.jsonin sisältämät notet
+end note
+Client->Server: GET /favicon.ico
+Server->Client: response: favicon.ico
+
+

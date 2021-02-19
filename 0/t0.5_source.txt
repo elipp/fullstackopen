@@ -1,0 +1,21 @@
+title t0.5
+
+
+
+Client->Server: GET /spa
+Server->Client: response: /spa (HTML)
+Client->Server: GET /main.css (tähän viitattu HTML:ssa <link rel="stylesheet"> ... )
+Server->Client: response: /main.css (CSS)
+Client->Server: GET /spa.js (myös tähän viitattu HTML:ssa) 
+Server->Client: response: /spa.js (JavaScript)
+note over Client
+spa.js:n suoritus alkaa -> xhttp.open("GET", "/exampleapp/data.json", true).
+Asynkronisesti skripti myös asettaa event handlerin window.onload, joka
+antaa save-nappulalle oman event handlerin (form.onsubmit)
+end note
+Client->Server: GET /data.json
+Server->Client: response: /data.json (JSON, [{"content": "blahblah", "date":"<DATE>"},...])
+note over Client
+Selain lukee data.jsonissa määritellyt notet ja kutsuu
+redrawNotes()-funktiota, joka renderöi notet sivulle
+end note
